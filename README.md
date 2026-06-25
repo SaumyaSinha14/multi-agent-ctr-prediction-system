@@ -1,7 +1,13 @@
 # Multi-Agent CTR Prediction System
 
 ## Project Overview
+## Project Overview
 
+This project is an end-to-end Multi-Agent Machine Learning pipeline built using LangGraph to predict whether a user will click on an advertisement (Click Through Rate Prediction).
+
+Instead of using a traditional monolithic machine learning workflow, the system follows an agent-based architecture where each agent performs an independent responsibility such as data ingestion, feature engineering, behavioral scoring, model training, evaluation, and final model selection.
+
+The project demonstrates modular AI workflow orchestration, business-aware model evaluation, and production-oriented model persistence.
 This project is an end-to-end Multi-Agent Machine Learning pipeline built using LangGraph to predict whether a user will click on an advertisement (Click Through Rate Prediction).
 
 Instead of using a traditional monolithic machine learning workflow, the system follows an agent-based architecture where each agent performs an independent responsibility such as data ingestion, feature engineering, behavioral scoring, model training, evaluation, and final model selection.
@@ -10,6 +16,14 @@ The project demonstrates modular AI workflow orchestration, business-aware model
 
 ---
 
+## Problem Statement
+
+Predict whether a user will click an online advertisement based on demographic information, browsing behavior, and engagement patterns.
+
+Target Variable:
+
+* clicked = 1 → User clicked advertisement
+* clicked = 0 → User did not click advertisement
 ## Problem Statement
 
 Predict whether a user will click an online advertisement based on demographic information, browsing behavior, and engagement patterns.
