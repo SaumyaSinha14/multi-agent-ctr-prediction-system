@@ -75,6 +75,7 @@ def user_behavior_node(state):
         "current_agent": "prediction_agent"
     }
 
+
 def prediction_node(state):
 
     df = state["dataframe"]

@@ -130,6 +130,8 @@ if __name__ == "__main__":
 
     df = behavior_agent.create_behavior_score(df)
 
+    print(df.columns.tolist())
+
     agent = PredictionAgent()
 
     agent.train_models(df)
