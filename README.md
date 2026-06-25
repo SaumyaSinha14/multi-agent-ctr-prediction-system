@@ -113,4 +113,4 @@ Higher Precision = Lower False Positives = Better Advertisement Spending Efficie
 
 ## Author
 
-Saumya Sinha
+Saumya
