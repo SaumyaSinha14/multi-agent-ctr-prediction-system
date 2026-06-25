@@ -1,31 +1,26 @@
 # Multi-Agent CTR Prediction System
 
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![LangGraph](https://img.shields.io/badge/LangGraph-AgenticAI-orange)
+![XGBoost](https://img.shields.io/badge/XGBoost-ML-red)
+![Status](https://img.shields.io/badge/Project-Completed-success)
+
+---
+
 ## Project Overview
 
-This project is an end-to-end Multi-Agent Machine Learning pipeline built using LangGraph to predict whether a user will click on an advertisement (Click Through Rate Prediction).
+This project is an end-to-end Multi-Agent Machine Learning pipeline built using LangGraph to predict whether a user will click on an online advertisement (Click Through Rate Prediction).
 
-Instead of using a traditional monolithic machine learning workflow, the system follows an agent-based architecture where each agent performs an independent responsibility such as data ingestion, feature engineering, behavioral scoring, model training, evaluation, and final model selection.
+Unlike traditional machine learning pipelines, this project uses an agent-based architecture where multiple independent agents handle specific responsibilities including data ingestion, feature engineering, behavioral scoring, model training, model evaluation, and automated business-aware final model selection.
 
-The project demonstrates modular AI workflow orchestration, business-aware model evaluation, and production-oriented model persistence.
-This project is an end-to-end Multi-Agent Machine Learning pipeline built using LangGraph to predict whether a user will click on an advertisement (Click Through Rate Prediction).
-
-Instead of using a traditional monolithic machine learning workflow, the system follows an agent-based architecture where each agent performs an independent responsibility such as data ingestion, feature engineering, behavioral scoring, model training, evaluation, and final model selection.
-
-The project demonstrates modular AI workflow orchestration, business-aware model evaluation, and production-oriented model persistence.
+The project demonstrates workflow orchestration, modular machine learning design, production-oriented model persistence, and real-time API deployment.
 
 ---
 
 ## Problem Statement
 
-Predict whether a user will click an online advertisement based on demographic information, browsing behavior, and engagement patterns.
-
-Target Variable:
-
-* clicked = 1 → User clicked advertisement
-* clicked = 0 → User did not click advertisement
-## Problem Statement
-
-Predict whether a user will click an online advertisement based on demographic information, browsing behavior, and engagement patterns.
+Predict whether a user will click on an advertisement based on demographic information, browsing behavior, and user engagement patterns.
 
 Target Variable:
 
@@ -64,9 +59,61 @@ Evaluation Agent
 FastAPI Layer
     ├── Receive JSON Input
     ├── Internal Feature Encoding
+    ├── Behavior Score Generation
     ├── Load Saved Model
     └── Return Prediction
 ```
+
+---
+
+## Agents Used
+
+### Data Agent
+
+* Loads dataset
+* Checks missing values
+* Validates dataset structure
+
+### Feature Engineering Agent
+
+* Encodes categorical variables using one-hot encoding
+* Converts categorical data into machine learning compatible format
+
+### User Behavior Agent
+
+* Creates custom behavior_score feature
+* Combines page views, session duration, and previous clicks for engagement analysis
+
+### Prediction Agent
+
+* Splits dataset into train-test sets
+* Trains Logistic Regression model
+* Trains XGBoost model
+* Calculates Accuracy, Precision, Recall, F1 Score, and Confusion Matrix
+
+### Evaluation Agent
+
+* Compares multiple model metrics
+* Uses business-aware evaluation logic
+* Prioritizes Precision over Accuracy
+* Saves best performing model using Joblib
+
+---
+
+## Tech Stack
+
+* Python
+* Pandas
+* Scikit-Learn
+* XGBoost
+* LangGraph
+* FastAPI
+* Joblib
+* Git
+* GitHub
+* Machine Learning
+* Classification Metrics
+
 ---
 
 ## Project Structure
@@ -96,54 +143,6 @@ CTR_Prediction_System/
 │
 └── README.md
 ```
----
-
-## Agents Used
-
-### Data Agent
-
-* Loads dataset
-* Checks missing values
-* Validates dataset structure
-
-### Feature Agent
-
-* Encodes categorical variables using one-hot encoding
-* Converts categorical data into machine learning friendly format
-
-### User Behavior Agent
-
-* Creates custom behavior_score feature using user engagement patterns
-* Combines page views, previous clicks, and session duration
-
-### Prediction Agent
-
-* Splits dataset into training and testing data
-* Trains Logistic Regression model
-* Trains XGBoost model
-* Calculates Accuracy, Precision, Recall, F1 Score, Confusion Matrix
-
-### Evaluation Agent
-
-* Compares multiple model metrics
-* Uses business logic for final model selection
-* Prioritizes Precision to reduce False Positives
-* Saves final selected model using Joblib
-
----
-
-## Tech Stack
-
-Python
-Pandas
-Scikit-Learn
-XGBoost
-LangGraph
-Joblib
-Git
-GitHub
-Machine Learning
-Classification Metrics
 
 ---
 
@@ -153,7 +152,7 @@ For CTR Prediction systems, False Positives increase advertisement expenditure.
 
 Therefore Precision was prioritized over Accuracy while selecting the final model.
 
-Higher Precision = Lower False Positives = Better Advertisement Spending Efficiency
+Higher Precision = Lower False Positives = Better Advertisement Spending Efficiency.
 
 ---
 
@@ -201,17 +200,14 @@ JSON Response
 {
   "prediction": 0
 }
+```
 
 Prediction Meaning:
 
-0 → User is unlikely to click advertisement
-1 → User is likely to click advertisement
-```
-## Future Improvements
+* 0 → User is unlikely to click advertisement
+* 1 → User is likely to click advertisement
 
-* Docker containerization
-* Deployment pipeline
-* Real-time inference system
+---
 
 ## Key Learnings
 
@@ -228,6 +224,15 @@ Through this project, I gained hands-on experience in:
 
 ---
 
+## Future Improvements
+
+* Docker containerization
+* Cloud deployment pipeline
+* Real-time inference system
+* Database integration for prediction logging
+
+---
+
 ## Author
 
-Saumya
+Saumya 
