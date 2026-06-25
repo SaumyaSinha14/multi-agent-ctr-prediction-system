@@ -1,7 +1,6 @@
 # Multi-Agent CTR Prediction System
 
 ## Project Overview
-## Project Overview
 
 This project is an end-to-end Multi-Agent Machine Learning pipeline built using LangGraph to predict whether a user will click on an advertisement (Click Through Rate Prediction).
 
