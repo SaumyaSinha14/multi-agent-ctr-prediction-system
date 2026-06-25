@@ -85,22 +85,32 @@ def prediction_node(state):
 
         "metrics": result["metrics"],
 
+        "models": result["models"],
+
         "current_agent": "evaluation_agent"
-}
+    }
     
 def evaluation_node(state):
 
     metrics = state["metrics"]
 
-    result = evaluation_agent.evaluate_metrics(metrics)
+    models = state["models"]
+
+    result = evaluation_agent.evaluate_metrics(
+        metrics,
+        models
+    )
 
     return {
+
+        "final_model": result["final_model"],
 
         "logs": [
 
             f'Final Model Selected: {result["final_model"]}',
 
             result["reason"]
+
         ],
 
         "current_agent": "completed"

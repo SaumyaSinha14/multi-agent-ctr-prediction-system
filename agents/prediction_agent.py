@@ -57,8 +57,8 @@ class PredictionAgent:
 
         xgb_accuracy = accuracy_score(y_test,xgb_predictions)
 
-        lr_precision = precision_score(y_test,lr_predictions)
-        xgb_precision = precision_score(y_test,xgb_predictions)
+        lr_precision = precision_score(y_test,lr_predictions,zero_division=0)
+        xgb_precision = precision_score(y_test,xgb_predictions,zero_division=0)
 
         lr_recall = recall_score(y_test,lr_predictions)
         xgb_recall = recall_score(y_test,xgb_predictions)
@@ -68,30 +68,7 @@ class PredictionAgent:
 
         print("XGBoost Accuracy:",
               xgb_accuracy)
-        
-        difference = abs(
-            lr_accuracy - xgb_accuracy) * 100
-        
 
-        if lr_accuracy > xgb_accuracy:
-
-            print(f"Logistic Regression performed better by {difference:.2f}%")
-            best_model = lr_model
-            best_model_name = "Logistic Regression"
-        else:
-
-            print(f"XGBoost performed better by {difference:.2f}%")
-            best_model = xgb_model
-            best_model_name = "XG Boost"
-
-
-        # Save best model permanently
-        joblib.dump(
-            best_model,
-            "models/best_model.pkl")
-
-        print("Best model saved successfully in models folder.")
-        
         
         cm1 = confusion_matrix(y_test, lr_predictions)
         print("Logistic Regression Confusion Matrix \n")
@@ -101,42 +78,41 @@ class PredictionAgent:
         print(cm2)
         
         print("Logistic Regression Classification Report \n")
-        print(classification_report(y_test, lr_predictions))
+        print(classification_report(y_test,lr_predictions,zero_division=0))
         print("\n")
         print("XG Boost Classification Report\n")
-        print(classification_report(y_test, xgb_predictions))
+        print(classification_report(y_test, xgb_predictions,zero_division=0))
 
-        if xgb_accuracy > lr_accuracy:
-
-            best_model = xgb_model
-
-            best_model_name = "XGBoost"
-
-        else:
-
-            best_model = lr_model
-
-            best_model_name = "Logistic Regression"
 
         # Returning results to langGraph
         return {
+            "metrics": 
+            
+            {
 
-        "metrics": {
+                 "lr_accuracy": lr_accuracy,
 
-            "lr_accuracy": lr_accuracy,
+                 "xgb_accuracy": xgb_accuracy,
 
-            "xgb_accuracy": xgb_accuracy,
+                 "lr_precision": lr_precision,
 
-            "lr_precision": lr_precision,
+                 "xgb_precision": xgb_precision,
 
-            "xgb_precision": xgb_precision,
+                 "lr_recall": lr_recall,
 
-            "lr_recall": lr_recall,
+                 "xgb_recall": xgb_recall
+    
+            },
 
-            "xgb_recall": xgb_recall
+            "models": { 
+                
+                 "lr_model": lr_model,
+
+                 "xgb_model": xgb_model
+            
+            }
 
         }
-}
 
 
 

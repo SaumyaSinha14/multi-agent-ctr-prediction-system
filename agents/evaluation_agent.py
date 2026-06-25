@@ -1,6 +1,9 @@
+import joblib
+
+
 class EvaluationAgent:
 
-    def evaluate_metrics(self, metrics):
+    def evaluate_metrics(self, metrics, models):
 
         lr_accuracy = metrics["lr_accuracy"]
         xgb_accuracy = metrics["xgb_accuracy"]
@@ -14,23 +17,34 @@ class EvaluationAgent:
 
         # Business decision logic
 
-        if lr_precision > xgb_precision:
-
-            final_model = "Logistic Regression"
-
-            reason = "Higher precision means fewer false positives."
-
-        elif xgb_accuracy > lr_accuracy:
+        if xgb_precision > lr_precision:
 
             final_model = "XGBoost"
 
-            reason = "Higher accuracy and better general performance."
+            reason = "Better balanced performance"
+
+            model_to_save = models["xgb_model"]
 
         else:
 
-            final_model = "XGBoost"
+            final_model = "Logistic Regression"
 
-            reason = "Better balanced performance."
+            reason = "Higher precision"
+
+            model_to_save = models["lr_model"]
+
+
+        # Save final selected model
+
+        joblib.dump(
+
+            model_to_save,
+
+            "models/best_model.pkl"
+
+        )
+
+        print("Best model saved successfully in models folder.")
 
 
         return {
